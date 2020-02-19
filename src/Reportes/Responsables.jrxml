@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Bien" language="groovy" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="16ea2c0d-7b62-4c6e-a595-fc22fd5c4080">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select bien.codigo_bien,bien.nombre,persona.cedula,concat(persona.nombre_persona,' ',persona.apellido_paterno,' ',persona.apellido_materno) as nombrePersona from persona join bien join responsable on responsable.persona_id_persona=persona.id_persona and responsable.bien_id_bien=bien.id_bien
+and responsable.persona_id_persona=persona.id_persona where  bien.codigo_bien like'%' || persona.cedula like'%' order by nombrePersona;]]>
+	</queryString>
+	<field name="codigo_bien" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cedula" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombrePersona" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="285" y="18" width="213" height="40" uuid="dea663d9-8528-44d1-9251-5dedce1d39a2"/>
+				<textElement>
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[Bienes Registrados]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="652" y="48" width="100" height="20" uuid="899780d8-3de9-48bc-b4b1-f70dd815a4bf"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="6" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="2" width="100" height="20" uuid="15f81804-e8e9-4ee7-a177-866fa7e3dd20"/>
+				<text><![CDATA[Código del ien]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="117" y="2" width="100" height="20" uuid="1b2827f8-d691-4935-8a96-8244c8b080cb"/>
+				<text><![CDATA[Nombre del Bien]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="463" y="0" width="119" height="20" uuid="d3553f91-5600-4e34-ab59-9e76ac683de4"/>
+				<text><![CDATA[Cédula del Responsable]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="604" y="0" width="131" height="20" uuid="e2c384b9-a692-457b-8553-63663eb7899b"/>
+				<text><![CDATA[Nombre del Responsable]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" uuid="9504c13f-86f5-43d3-accf-7e2c3dedf2cb"/>
+				<textFieldExpression><![CDATA[$F{codigo_bien}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="117" y="0" width="346" height="20" uuid="ceb3fc9d-27d7-4221-97ef-79b2faba2951"/>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="463" y="0" width="100" height="20" uuid="9cf3f47e-d161-4116-8a65-7a6cfaeac6d4"/>
+				<textFieldExpression><![CDATA[$F{cedula}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="604" y="0" width="210" height="20" uuid="0ce626f4-dd3d-4ba1-931e-fa3d26bc8a30"/>
+				<textFieldExpression><![CDATA[$F{nombrePersona}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="6" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="305" y="5" width="80" height="20" uuid="130cb0f4-33f1-417a-95fb-64fd08f3084e"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="385" y="5" width="40" height="20" uuid="6faf81f5-69d0-4f52-b43f-1b37f9a92b6a"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
